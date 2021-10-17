@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import { theme } from "./theme/theme";
 
@@ -10,8 +11,10 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
     <React.StrictMode>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </React.StrictMode>
-    </ThemeProvider>,
+  </ThemeProvider>,
   document.getElementById("root")
 );

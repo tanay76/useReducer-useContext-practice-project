@@ -1,35 +1,26 @@
-import React, { Fragment, useState } from "react";
+import React from "react";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
-import LoginModal, { ClickOpenButton } from "./components/LoginModal";
+import Home from "./components/Home";
+import { Switch, Route, Redirect } from "react-router";
 
 function App() {
-  const [open, setOpen] = useState(false);
-
-  function clickOpenHandler() {
-    setOpen(true);
-  }
-
-  function handleClose() {
-    setOpen(false);
-  }
 
   return (
-    <Fragment>
-      <Layout>
-        <Login />
-        {!open && <ClickOpenButton onClickOpen={clickOpenHandler} />}
-        {open && (
-          <LoginModal
-            open={open}
-            title="Alert:"
-            message="Form not filled properly"
-            onClose={handleClose}
-            error={true}
-          />
-        )}
-      </Layout>
-    </Fragment>
+    <Layout>
+      <Switch>
+        <Route path='/' exact>
+          <Home />
+        </Route>
+        <Route path='/admin'>
+          <Redirect to='/' />
+        </Route>
+        {/* Remember that in actual application when not logged in, '/' & '/login' would be the same page */}
+        <Route path='/login'>
+          <Login />
+        </Route>
+      </Switch>
+    </Layout>
   );
 }
 

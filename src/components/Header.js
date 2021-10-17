@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { makeStyles, Tabs, Tab } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -42,8 +43,27 @@ export default function Header(props) {
               onChange={changeHandler}
               indicatorColor="primary"
             >
-              <Tab className={classes.tab} disableRipple label="Users" />
-              <Tab className={classes.tab} disableRipple label="Login" />
+              <Tab
+                className={classes.tab}
+                disableRipple
+                label="Home"
+                component={Link}
+                to="/"
+              />
+              <Tab
+                className={classes.tab}
+                disableRipple
+                label="Admin"
+                component={Link}
+                to="/admin"
+              />
+              <Tab
+                className={classes.tab}
+                disableRipple
+                label="Login"
+                component={Link}
+                to="/login"
+              />
               <Tab className={classes.tab} disableRipple label="Logout" />
             </Tabs>
           </Toolbar>
@@ -68,9 +88,11 @@ const useStyles = makeStyles((theme) => ({
   tabsContainer: {
     marginLeft: "auto",
     color: "#fff",
+    textDecoration: "none",
   },
   tab: {
     textTransform: "none",
+    textDecoration: "none",
     marginLeft: "8px",
     fontSize: "1rem",
     minWidth: "1.5rem",

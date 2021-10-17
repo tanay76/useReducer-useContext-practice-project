@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { TextField, Button, Typography } from '@material-ui/core';
+import { ClickOpenButton } from './LoginModal';
+import LoginModal from './LoginModal';
 
 
 
 export default function Login() {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
+  function clickOpenHandler() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
 
   return (
     <div className={classes.root}>
@@ -20,6 +31,16 @@ export default function Login() {
           </Button>
         </form>
       </Paper>
+      {!open && <ClickOpenButton onClickOpen={clickOpenHandler} />}
+      {open && (
+        <LoginModal
+          open={open}
+          title="Alert:"
+          message="Form not filled properly"
+          onClose={handleClose}
+          error={true}
+        />
+      )}
     </div>
   );
 }
@@ -27,6 +48,7 @@ export default function Login() {
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',
